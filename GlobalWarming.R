@@ -151,3 +151,4 @@ yt1<-ggplot(data_yukon,aes(Month,AverageTemperature, group=Year,color =as.numeri
         plot.title = element_text(size=16,face = "bold")) + 
   ggtitle("Average Temperature change in Yukon by Month and Year") 
 ggplotly(yt1)
+
