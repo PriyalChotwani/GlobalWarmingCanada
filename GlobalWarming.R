@@ -132,7 +132,7 @@ mb1<-ggplot(data_manitoba,aes(Month,AverageTemperature, group=Year,color =as.num
   theme(panel.background=element_blank())+ scale_color_viridis(option="D")+
   labs(color="Year") +
   facet_wrap(~Province)+
-  theme(legend.position = "bottom",
+  theme(lgiegend.position = "bottom",
         axis.text = element_text(size = 10,face="bold"),
         plot.title = element_text(size=16,face = "bold")) + 
   ggtitle("Average Temperature change in Manitoba by Month and Year") 
