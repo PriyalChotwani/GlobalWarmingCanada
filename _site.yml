@@ -1,12 +1,12 @@
- name: "GlobalWarming"
-  output_dir: "docs"
-  navbar:
-    title: "GlobalWarming"
-    left:
-    - text: "Home"
-        href: index.html
-    - text: "Visualizations"
-        href: GlobalWarming.html
-  output:
-    html_document:
-      theme: cosmo
+name: "GlobalWarming"
+output_dir: "docs"
+navbar:
+  title: "GlobalWarming"
+  left:
+  - text: "Home"
+    href: index.html
+  - text: "GlobalWarming"
+    href: GlobalWarming.html
+output:
+  html_document:
+    theme: cosmo
