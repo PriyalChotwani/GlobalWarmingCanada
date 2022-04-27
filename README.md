@@ -57,6 +57,7 @@ predict(fit_1, data.frame(Year=1991))
 summary(fit_1)
 ```
 
+
 Therefore, from the model it is visible that the average temperature of Canada is continuously going up, hence some measures need to be taken to monitor this issue closely and take care of our environment more than we have ever so that the next lives to come can survive without any environment difficulties. 
 
 # Additional Visualizations
