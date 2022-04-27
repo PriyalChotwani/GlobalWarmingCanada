@@ -22,17 +22,45 @@ Figure represents a screenshot of the geo graph which is originally in the form 
 ### Is there any major change in temperature of Canadian provinces from 1987 to 2006?
 To find out the major changes in the average temperature of each province with every passing year, a line graph is plotted using the ggplot2 package in RStudio. Geom_line and geom_point functions are used to track the changes in average temperatures from 1987 to 2006. Each province is visualized using a different colour to better differentiate and understand the variations. 
 
+```
+data_clean<- read.csv("..../Canada20.csv")
+data_clean<-rename(data_clean, AverageTemperature=Mean.Temp...C.)
+```
+
 Figure represents a line chart to analyze the temperature change over the years for each Canadian province/territory. However, due to inconsistency in the dataset, there are major changes in certain provinces for a few years. In the case of the Northwest Territories, there is a dip in 1990 due to missing values but there is a peak in 1998. After careful consideration and research, it was discovered that in 1998, Canadians experienced the warmest and longest summers, there were costliest forest fires recorded, followed by a year-long heatwave (Government of Canada, 1998). Therefore, almost all the provinces experienced a rise in average temperature during that year. In 2000, many provinces experienced a dip in their average temperatures (For Manitoba, it is due to
 missing values). After careful observation and research, we found out that Canadians experienced a rare landfalling hurricane and first time in 13 years, a deadly tornado touched down in Canada killing 12 people. (Government of Canada, 2000) To analyze and observe such drastic variations and occurrences, this graph can be very informative. The provinces which have complete and consistent values for all the years experienced relatively stable temperatures over the years. If the dataset was consistent and available till 2021, this would have been a great visualization to observe the trends in average temperature over the years. 
 
 ### What is the prediction of the average temperature in Canada in the coming years?
 To know how the temperature will vary and how much change will Canada undergo in terms of average temperature, I randomly chose the years 2024, 2035 and 2050. I chose the Linear Regression model to predict the value of the average temperature of the mentioned years (dependent variable) using the value of the average temperature in the previous years that is already present in the dataset (independent variable). This model is chosen because it gives a better understanding of the statistical inference, it is more versatile, and it has wider applicability. I tried to fit the linear model in the preprocessed dataset by using the ggplot2 package in RStudio and geom_point and stat_smooth function by using the “lm” method. This is a pre-built function in R to create a regression model in the form of the formula Y~X+X2. In this case, there are only 2 variables Y being Average Temperature and X being the year. To check the accuracy of the model, the average temperature of the years 1991, 1993, and 2003 is obtained and compared to the values present in the dataset. Later, the average temperature of the years 2024, 2035, and 2050 is predicted using another pre-built function in R called predict. 
 
+```
+data_clean123<- data_clean %>% select(AverageTemperature, Year, Province)
+data_clean123<- data_clean123 %>% group_by(Year)%>%summarise(AverageTemperature= mean(AverageTemperature))
+```
+```
+ggplot(data = data_clean123, aes(x = Year, y = AverageTemperature, color= AverageTemperature)) +
+  geom_point() +
+  stat_smooth(method = "lm", col = "dodgerblue3") +
+  theme(panel.background = element_rect(fill = "white"),
+        axis.line.x=element_line(),
+        axis.line.y=element_line()) +
+  ggtitle("Linear Model Fitted to Data")
+```
+
 Figure represents the linear regression model. In this case, the data points are very scattered so it is difficult to identify which model will best fit this dataset. The linear model can fit. As per the graph, it is evident that there is a positive slope, therefore the temperature in Canada is gradually increasing. In an ideal scenario, the points are very close to the line which helps in determining or predicting the variables more accurately and efficiently. To calculate the error percentage of the model, I randomly selected the year 1991, 1993, and 2003 and predicted the average temperature as per the model. As per the code shown, where fit_1 represents our data frame, the predicted value is 1.02174 whereas the actual value is 1.1496 which gives an 11.12% error rate for the year 1991. Table 1 represents the error percentage calculated by choosing 3 years randomly in the similar manner shown, so the average error percentage is 13.83%.
+
+```
+fit_1 <- lm(AverageTemperature ~ Year, data = data_clean123)
+predict(fit_1, data.frame(Year=2002))
+predict(fit_1, data.frame(Year=1993))
+predict(fit_1, data.frame(Year=1991))
+summary(fit_1)
+```
 
 Therefore, from the model it is visible that the average temperature of Canada is continuously going up, hence some measures need to be taken to monitor this issue closely and take care of our environment more than we have ever so that the next lives to come can survive without any environment difficulties. 
 
 # Additional Visualizations
+
 ```
 data_cans1 = data_clean %>% group_by(Year,Month) %>% filter(Year == 1987 |Year == 1992 |Year == 1997 |Year == 2002 |Year == 2006) 
 hchart(data_cans1,type="column",hcaes(x = Month,y = AverageTemperature, group = Year)) %>%
