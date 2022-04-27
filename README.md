@@ -16,6 +16,10 @@ The data set can be improved by having all the values for every month in all the
 
 ### What is the temperature change in all the provinces of Canada in the span of 20 years (1987-2006)?
 Geo graph is plotted using plotly function where the Canada20 dataset is combined with the data obtained from the pre-build R packages (devtools, sf, rnaturalearth) by using left join and the records are matched using the column provinces. The pre-built dataset has the information about geometry, which is necessary to plot the Geo map of Canada in RStudio and the preprocessed dataset (Canada20) contains the necessary information about the average temperature of each province by year from 1987 to 2006. It is an interactive geo-map in a form of a GIF, where the colour of provinces changes with the temperature variations. 
+<p align="center">
+ <img src= "Images/GlobalWarming_Q1_A.png">
+  <img src= "Images/GlobalWarming_Q1_B.png">
+</p>
 
 Figure represents a screenshot of the geo graph which is originally in the form of GIF. First figure is for the year 1987 and second figure represents it for 2006. There has been a major dip in the average temperature of Newfoundland and Labrador being 4.67°C in 1987 to -3.25°C in 2006. For Yukon, the temperature dropped from -4.12°C in 1987 to -22.95°C in 2006. This might make someone greatly wonder as it is a huge drop that makes Yukon unlivable for a person. Therefore, after deeper analysis of the dataset, it was discovered that there are only 2 entries in 2006 for the months January and February. Also, the same thing happened for Manitoba in the year 1995 and the temperature suddenly dropped to -19.5°C which was due to a similar reason as only 2 entries were recorded in 1995 for January and February. Therefore, it was concluded that proper insights could not be discovered unless all the data points are available. This is generally a great visualization for business processes involving the overall changes in different provinces of a country and it can be utilized to present the information to the stakeholders in a visually appealing manner (Given the dataset is complete and consistent).
 
@@ -26,6 +30,10 @@ To find out the major changes in the average temperature of each province with e
 data_clean<- read.csv("..../Canada20.csv")
 data_clean<-rename(data_clean, AverageTemperature=Mean.Temp...C.)
 ```
+
+<p align="center">
+ <img src= "Images/GlobalWarming_Q2.png">
+</p>
 
 Figure represents a line chart to analyze the temperature change over the years for each Canadian province/territory. However, due to inconsistency in the dataset, there are major changes in certain provinces for a few years. In the case of the Northwest Territories, there is a dip in 1990 due to missing values but there is a peak in 1998. After careful consideration and research, it was discovered that in 1998, Canadians experienced the warmest and longest summers, there were costliest forest fires recorded, followed by a year-long heatwave (Government of Canada, 1998). Therefore, almost all the provinces experienced a rise in average temperature during that year. In 2000, many provinces experienced a dip in their average temperatures (For Manitoba, it is due to
 missing values). After careful observation and research, we found out that Canadians experienced a rare landfalling hurricane and first time in 13 years, a deadly tornado touched down in Canada killing 12 people. (Government of Canada, 2000) To analyze and observe such drastic variations and occurrences, this graph can be very informative. The provinces which have complete and consistent values for all the years experienced relatively stable temperatures over the years. If the dataset was consistent and available till 2021, this would have been a great visualization to observe the trends in average temperature over the years. 
@@ -47,6 +55,10 @@ ggplot(data = data_clean123, aes(x = Year, y = AverageTemperature, color= Averag
   ggtitle("Linear Model Fitted to Data")
 ```
 
+<p align="center">
+ <img src= "Images/GlobalWarming_Q3.png">
+</p>
+
 Figure represents the linear regression model. In this case, the data points are very scattered so it is difficult to identify which model will best fit this dataset. The linear model can fit. As per the graph, it is evident that there is a positive slope, therefore the temperature in Canada is gradually increasing. In an ideal scenario, the points are very close to the line which helps in determining or predicting the variables more accurately and efficiently. To calculate the error percentage of the model, I randomly selected the year 1991, 1993, and 2003 and predicted the average temperature as per the model. As per the code shown, where fit_1 represents our data frame, the predicted value is 1.02174 whereas the actual value is 1.1496 which gives an 11.12% error rate for the year 1991. Table 1 represents the error percentage calculated by choosing 3 years randomly in the similar manner shown, so the average error percentage is 13.83%.
 
 ```
@@ -56,7 +68,9 @@ predict(fit_1, data.frame(Year=1993))
 predict(fit_1, data.frame(Year=1991))
 summary(fit_1)
 ```
-
+<p align="center">
+ <img src= "Images/GlobalWarming_Table.png">
+</p>
 
 Therefore, from the model it is visible that the average temperature of Canada is continuously going up, hence some measures need to be taken to monitor this issue closely and take care of our environment more than we have ever so that the next lives to come can survive without any environment difficulties. 
 
@@ -69,6 +83,9 @@ hchart(data_cans1,type="column",hcaes(x = Month,y = AverageTemperature, group = 
   hc_add_theme(hc_theme_google()) %>%
   hc_legend(enabled = TRUE)
 ```
+<p align="center">
+ <img src= "Images/AdditionalVisualization_1.png">
+</p>
 
 ```
 ggplot(data_clean,aes(x=Month,y=AverageTemperature, color=as.numeric(Year))) + 
@@ -82,6 +99,10 @@ ggplot(data_clean,aes(x=Month,y=AverageTemperature, color=as.numeric(Year))) +
         plot.title = element_text(size=17,face = "bold")) + 
   ggtitle("Month Temperature in Canada") 
 ```
+<p align="center">
+ <img src= "Images/AdditionalVisualization_2.png">
+</p>
+
 # Limitations
 R is a very powerful language to perform data visualization and data prediction. It has been successful in capturing the market to an extent that, it has become a necessity for every data analyst and data scientist to know briefly about this tool. It allows the user to perform statistical analysis and plot
 complex visualizations. It has an option to write code in a script, notebook, and markdown coding environment, and can be exported to different types of files which can fulfil a different displaying purpose.
