@@ -32,6 +32,27 @@ Figure represents the linear regression model. In this case, the data points are
 
 Therefore, from the model it is visible that the average temperature of Canada is continuously going up, hence some measures need to be taken to monitor this issue closely and take care of our environment more than we have ever so that the next lives to come can survive without any environment difficulties. 
 
+# Additional Visualizations
+```
+data_cans1 = data_clean %>% group_by(Year,Month) %>% filter(Year == 1987 |Year == 1992 |Year == 1997 |Year == 2002 |Year == 2006) 
+hchart(data_cans1,type="column",hcaes(x = Month,y = AverageTemperature, group = Year)) %>%
+  hc_title(text = "Month Temperatures in Canada every 5 years") %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_legend(enabled = TRUE)
+```
+
+```
+ggplot(data_clean,aes(x=Month,y=AverageTemperature, color=as.numeric(Year))) + 
+  geom_jitter(size=1) +
+  scale_color_viridis(option="B")+
+  theme(axis.line = element_line(color = "orange",size=.75))+
+  theme(panel.background=element_blank())+
+  scale_x_discrete()+labs(color="Year") +
+  theme(legend.position = "bottom",
+        axis.text = element_text(size = 10,face="bold"),
+        plot.title = element_text(size=17,face = "bold")) + 
+  ggtitle("Month Temperature in Canada") 
+```
 # Limitations
 R is a very powerful language to perform data visualization and data prediction. It has been successful in capturing the market to an extent that, it has become a necessity for every data analyst and data scientist to know briefly about this tool. It allows the user to perform statistical analysis and plot
 complex visualizations. It has an option to write code in a script, notebook, and markdown coding environment, and can be exported to different types of files which can fulfil a different displaying purpose.
